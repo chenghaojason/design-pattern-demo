@@ -21,6 +21,14 @@ public class ParesXML {
     public static final String TV_PACKAGE = "com.jason.test.designpattern.factory.factoryMethod.tv.";
     public static final String IMAGE_PACKAGE = "com.jason.test.designpattern.factory.factoryMethod.image.";
 
+    /**
+     * 生成品牌对象
+     *
+     * @return 对象
+     * @throws ParserConfigurationException 解析异常
+     * @throws IOException                  IO异常
+     * @throws SAXException                 异常
+     */
     public static String getBrandName() throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilder builder = getDocumentBuilder();
         Document document = builder.parse(new File("D:\\workspace\\test-workspace\\design-pattern-workspace\\design-pattern-demo\\src\\main\\resources\\factory\\brandName.xml"));
@@ -33,6 +41,14 @@ public class ParesXML {
         return nodeList.item(0).getFirstChild();
     }
 
+    /**
+     * 创建对象
+     *
+     * @param path 类的全路径
+     * @param file xml文件的路径
+     * @return 所需对象
+     * @throws NewInstanceException 实例化失败异常
+     */
     public static Object getBean(String path, File file) throws NewInstanceException {
         Object newInstance;
         String className = "未知";
@@ -50,6 +66,14 @@ public class ParesXML {
         return newInstance;
     }
 
+    /**
+     * 创建图片专属对象
+     *
+     * @param path 类的全路径
+     * @param file xml文件的路径
+     * @return 所需对象
+     * @throws NewInstanceException 实例化失败异常
+     */
     public static Object getImageBean(String path, File file) throws NewInstanceException {
         Object newInstance;
         String className = "未知";
