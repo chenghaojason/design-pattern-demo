@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<config>
+    <dataBase>
+        <className>OracleFactory</className>
+        <dataBaseName>Oracle</dataBaseName>
+        <ip>localhost</ip>
+        <port>1526</port>
+        <username>test</username>
+        <password>123456</password>
+    </dataBase>
+    <dataBase>
+        <className>MySqlFactory</className>
+        <dataBaseName>MySql</dataBaseName>
+        <ip>localhost</ip>
+        <port>3362</port>
+        <username>test</username>
+        <password>123456</password>
+    </dataBase>
+</config>
