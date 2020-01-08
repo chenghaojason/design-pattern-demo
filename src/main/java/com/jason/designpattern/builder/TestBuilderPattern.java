@@ -2,6 +2,9 @@ package com.jason.designpattern.builder;
 
 import com.jason.commons.exception.NewInstanceException;
 import com.jason.commons.utils.ParesXML;
+import com.jason.designpattern.builder.computer.Computer;
+import com.jason.designpattern.builder.computer.ComputerAbstractBuilder;
+import com.jason.designpattern.builder.computer.Salesperson;
 import com.jason.designpattern.builder.dy.*;
 import com.jason.designpattern.builder.kfc.KFCWaiter;
 import com.jason.designpattern.builder.kfc.Meal;
@@ -31,6 +34,10 @@ public class TestBuilderPattern {
         Meal meal = kfcWaiter.construct();
         System.out.println(meal.toString());
 
-
+        // 电脑销售员
+        ComputerAbstractBuilder computerAbstractBuilder = (ComputerAbstractBuilder) ParesXML.getBean(ParesXML.BU_COMPUTER_PACKAGE, new File("src/main/resources/builder/builder-pattern-computer.xml"));
+        Salesperson salesperson = new Salesperson(computerAbstractBuilder);
+        Computer computer = salesperson.choose();
+        System.out.println(computer.toString());
     }
 }

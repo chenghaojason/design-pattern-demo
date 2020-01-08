@@ -29,6 +29,7 @@ public class ParesXML {
     public static final String ABDY_PACKAGE = "com.jason.designpattern.factory.abstractFactory.dy.classes.";
     public static final String DB_PACKAGE = "com.jason.designpattern.factory.abstractFactory.database.classes.";
     public static final String BU_KFC_PACKAGE = "com.jason.designpattern.builder.kfc.";
+    public static final String BU_COMPUTER_PACKAGE = "com.jason.designpattern.builder.computer.";
 
     /**
      * 创建对象
