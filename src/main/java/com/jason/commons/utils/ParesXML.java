@@ -3,7 +3,7 @@ package com.jason.commons.utils;
 import com.jason.commons.beans.db.DataBase;
 import com.jason.commons.beans.db.DataBaseConfiguration;
 import com.jason.commons.exception.NewInstanceException;
-import com.jason.designpattern.factory.abstractFactory.database.interfaces.DBFactory;
+import com.jason.designpattern.create.factory.abstractFactory.database.interfaces.DBFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -23,13 +23,13 @@ import java.util.List;
  * @create 2019/12/12 - 22:27
  */
 public class ParesXML {
-    public static final String DY_PACKAGE = "com.jason.designpattern.factory.factoryMethod.dy.";
-    public static final String TV_PACKAGE = "com.jason.designpattern.factory.factoryMethod.tv.";
-    public static final String IMAGE_PACKAGE = "com.jason.designpattern.factory.factoryMethod.image.";
-    public static final String ABDY_PACKAGE = "com.jason.designpattern.factory.abstractFactory.dy.classes.";
-    public static final String DB_PACKAGE = "com.jason.designpattern.factory.abstractFactory.database.classes.";
-    public static final String BU_KFC_PACKAGE = "com.jason.designpattern.builder.kfc.";
-    public static final String BU_COMPUTER_PACKAGE = "com.jason.designpattern.builder.computer.";
+    public static final String DY_PACKAGE = "com.jason.designpattern.create.factory.factoryMethod.dy.";
+    public static final String TV_PACKAGE = "com.jason.designpattern.create.factory.factoryMethod.tv.";
+    public static final String IMAGE_PACKAGE = "com.jason.designpattern.create.factory.factoryMethod.image.";
+    public static final String ABDY_PACKAGE = "com.jason.designpattern.create.factory.abstractFactory.dy.classes.";
+    public static final String DB_PACKAGE = "com.jason.designpattern.create.factory.abstractFactory.database.classes.";
+    public static final String BU_KFC_PACKAGE = "com.jason.designpattern.create.builder.kfc.";
+    public static final String BU_COMPUTER_PACKAGE = "com.jason.designpattern.create.builder.computer.";
 
     /**
      * 创建对象

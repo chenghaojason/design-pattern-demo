@@ -1,6 +1,6 @@
 package com.jason.commons.beans.db;
 
-import com.jason.designpattern.factory.abstractFactory.database.interfaces.DBFactory;
+import com.jason.designpattern.create.factory.abstractFactory.database.interfaces.DBFactory;
 
 /**
  * 抽象工厂中数据库配置信息
