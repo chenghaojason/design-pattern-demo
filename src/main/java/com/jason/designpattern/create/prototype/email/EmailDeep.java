@@ -21,10 +21,12 @@ public class EmailDeep implements Serializable {
     private Attachments attachments = null; // 邮件附件
 
     private String type; // 邮件类型
+    private int level; // 邮件等级
 
-    public EmailDeep(String type) {
+    public EmailDeep(String type ,int level) {
         this.attachments = new Attachments();
         this.type = type;
+        this.level=level;
     }
 
     /**
@@ -38,6 +40,10 @@ public class EmailDeep implements Serializable {
 
     public String getType() {
         return type;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public Object deepClone() throws Exception {

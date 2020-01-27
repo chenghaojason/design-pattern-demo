@@ -16,10 +16,12 @@ public class EmailShallow implements Cloneable {
     private Attachments attachments = null; // 邮件附件
 
     private String type; // 邮件类型
+    private int level; // 邮件等级
 
-    public EmailShallow(String type) {
+    public EmailShallow(String type ,int level) {
         this.attachments = new Attachments();
         this.type = type;
+        this.level=level;
     }
 
     /**
@@ -34,7 +36,9 @@ public class EmailShallow implements Cloneable {
     public String getType() {
         return type;
     }
-
+    public int getLevel() {
+        return level;
+    }
     @Override
     public EmailShallow clone() throws CloneNotSupportedException {
         return (EmailShallow) super.clone();

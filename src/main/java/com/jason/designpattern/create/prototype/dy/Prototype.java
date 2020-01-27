@@ -1,6 +1,9 @@
 package com.jason.designpattern.create.prototype.dy;
 
-public abstract class Prototype implements Cloneable{
+/**
+ * 抽象原型类
+ */
+public abstract class Prototype implements Cloneable {
     private String className;
 
     public String getClassName() {
