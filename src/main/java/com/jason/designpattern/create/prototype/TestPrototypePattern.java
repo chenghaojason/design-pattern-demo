@@ -2,6 +2,8 @@ package com.jason.designpattern.create.prototype;
 
 import com.jason.designpattern.create.prototype.color.Color;
 import com.jason.designpattern.create.prototype.color.ColorPrototypeManager;
+import com.jason.designpattern.create.prototype.deepclone.Engine;
+import com.jason.designpattern.create.prototype.deepclone.VolkswagenCar;
 import com.jason.designpattern.create.prototype.dy.PrototypeDemo;
 import com.jason.designpattern.create.prototype.email.EmailDeep;
 import com.jason.designpattern.create.prototype.email.EmailShallow;
@@ -22,7 +24,7 @@ public class TestPrototypePattern {
         // 邮件   浅克隆
         System.out.println("===== 浅克隆 =====");
         EmailShallow emailShallow, copyEmailShallow;
-        emailShallow = new EmailShallow("qq邮件",1);
+        emailShallow = new EmailShallow("qq邮件", 1);
         copyEmailShallow = emailShallow.clone(); // 浅克隆
         // 通过以下的输出结果可以看到，附件对象是相同的，也就是浅克隆并没有重新复制一份新的附件对象，引用的还是原对象中的引用。
         // 原型对象和克隆对象维持了对相同的成员对象的引用。
@@ -34,7 +36,7 @@ public class TestPrototypePattern {
         // 邮件   深克隆
         System.out.println("===== 深克隆 =====");
         EmailDeep emailDeep, copyEmailDeep;
-        emailDeep = new EmailDeep("网易163邮件",3);
+        emailDeep = new EmailDeep("网易163邮件", 3);
         copyEmailDeep = (EmailDeep) emailDeep.deepClone();
 
         System.out.println("emailDeep == copyEmailDeep ？" + (emailDeep == copyEmailDeep));
@@ -49,6 +51,21 @@ public class TestPrototypePattern {
         Color red2 = manager.getColor("red");
         red2.display();
         System.out.println("通过原型管理器获得的red1和red2是否相同？" + (red1 == red2));
+
+        //汽车 深克隆
+        VolkswagenCar volkswagenCar = new VolkswagenCar();
+        volkswagenCar.setColor("白色");
+        volkswagenCar.setHeight(1.5);
+        volkswagenCar.setNumber(1000);
+
+        Engine engine = new Engine();
+        engine.setNum("V6");
+        volkswagenCar.setEngine(engine);
+
+        VolkswagenCar volk = (VolkswagenCar) volkswagenCar.clone();
+        System.out.println("深克隆汽车是否相同：" + (volkswagenCar == volk));
+        System.out.println("深克隆汽车的引用对象发动机是否相同：" + (volkswagenCar.getEngine() == volk.getEngine()));
+
 
     }
 }
