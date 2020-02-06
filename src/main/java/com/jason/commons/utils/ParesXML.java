@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * XML解析工具
+ *
  * @author ChenHol.Wong
  * @create 2019/12/12 - 22:27
  */
@@ -30,6 +32,8 @@ public class ParesXML {
     public static final String DB_PACKAGE = "com.jason.designpattern.create.factory.abstractFactory.database.classes.";
     public static final String BU_KFC_PACKAGE = "com.jason.designpattern.create.builder.kfc.";
     public static final String BU_COMPUTER_PACKAGE = "com.jason.designpattern.create.builder.computer.";
+    public static final String POWER_PACKAGE = "com.jason.designpattern.structural.adapter.power.";
+    public static final String ENCRYPT_PACKAGE = "com.jason.designpattern.structural.adapter.encrypt.";
 
     /**
      * 创建对象
@@ -215,6 +219,32 @@ public class ParesXML {
             Node node = getNode(document, "className");
             className = node.getNodeValue();
             className = className.substring(0, 1) + className.substring(1).toLowerCase() + "ImageFactory";
+
+            Class<?> clazz = Class.forName(path + className);
+            newInstance = clazz.newInstance();
+        } catch (Exception e) {
+            throw new NewInstanceException(className, "类实例化失败", e);
+        }
+        return newInstance;
+    }
+
+    /**
+     * 创建加密专属对象
+     * 如：在适配器中用到
+     *
+     * @param path 类的全路径
+     * @param file xml文件的路径
+     * @return 所需对象
+     * @throws NewInstanceException 实例化失败异常
+     */
+    public static Object getEncryptBean(String path, File file) throws NewInstanceException {
+        Object newInstance;
+        String className = "未知";
+        try {
+            DocumentBuilder builder = getDocumentBuilder();
+            Document document = builder.parse(file);
+            Node node = getNode(document, "className");
+            className = node.getNodeValue() + "EncryptAdapter";
 
             Class<?> clazz = Class.forName(path + className);
             newInstance = clazz.newInstance();
