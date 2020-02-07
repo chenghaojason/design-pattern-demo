@@ -16,7 +16,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * XML解析工具
@@ -34,6 +36,9 @@ public class ParesXML {
     public static final String BU_COMPUTER_PACKAGE = "com.jason.designpattern.create.builder.computer.";
     public static final String POWER_PACKAGE = "com.jason.designpattern.structural.adapter.power.";
     public static final String ENCRYPT_PACKAGE = "com.jason.designpattern.structural.adapter.encrypt.";
+    public static final String COLOR_PACKAGE = "com.jason.designpattern.structural.bridge.picture.color.";
+    public static final String SHAPE_PACKAGE = "com.jason.designpattern.structural.bridge.picture.shape.";
+    public static final String VIDEO_PACKAGE = "com.jason.designpattern.structural.bridge.video.";
 
     /**
      * 创建对象
@@ -125,6 +130,48 @@ public class ParesXML {
             throw new NewInstanceException(className, "类实例化失败", e);
         }
         return objects;
+    }
+
+    /**
+     * 获取父节点是bridge的子节点元素，初步用于桥接模式中，子节点只有两个：abstraction和implementor
+     *
+     * @param implPckage      桥接模式中接口所在的包
+     * @param abstractPackage 桥接模式中抽象类所在的包
+     * @param file            要解析的文件路径
+     * @return 返回map中key=abstraction是抽象类，key=implementor是接口
+     * @throws NewInstanceException 反射异常
+     */
+    public static Map<String, Object> getPictureInfo(String implPckage, String abstractPackage, File file) throws NewInstanceException {
+        HashMap<String, Object> map = new HashMap<>();
+        String parentNode = "birdge";
+        NodeList nodeList;
+        try {
+            nodeList = getNodeList(file, parentNode);
+        } catch (Exception e) {
+            throw new NewInstanceException("文件解析失败", e);
+        }
+        int length = nodeList.getLength();
+        if (length == 0) {
+            throw new NewInstanceException("未找到 " + parentNode + " 此节点");
+        }
+        try {
+            for (int i = 0; i < length; i++) {
+                Element element = (Element) nodeList.item(i);
+                reflectShape(map, element, implPckage, abstractPackage);
+            }
+        } catch (Exception e) {
+            throw new NewInstanceException("图形中类解析失败", e);
+        }
+        return map;
+    }
+
+    private static void reflectShape(HashMap<String, Object> map, Element element, String implPckage, String abstractPackage) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        String abstraction = element.getElementsByTagName("abstraction").item(0).getFirstChild().getNodeValue();
+        String implementor = element.getElementsByTagName("implementor").item(0).getFirstChild().getNodeValue();
+        Class<?> colorClazz = Class.forName(implPckage + implementor);
+        Class<?> shapeClazz = Class.forName(abstractPackage + abstraction);
+        map.put("implementor", colorClazz.newInstance());
+        map.put("abstraction", shapeClazz.newInstance());
     }
 
     /**
