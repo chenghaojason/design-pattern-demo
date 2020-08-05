@@ -4,3 +4,47 @@
 实现装饰模式有两种方式：
     1.继承机制：不能灵活使用。
     2.关联机制：将一个类的对象嵌入到另一个新的类中。我们称这个新的对象（另一个对象）为装饰器（Decorator）。装饰器与它所装饰的对象必须实现同一个接口。
+
+
+装饰模式也可以简单化，没有抽象构件类（主接口），使具体构件类作为抽象装饰类的父类，也就是抽象装饰类继承具体构件类，在抽象装饰类中引用具体构件类。
+
+装饰模式分为：透明装饰模式和半透明装饰模式。
+1.透明装饰模式;要求客户端完全针对抽象编程。全部声明为抽象构件类型。比如InputStream中，
+    将
+        FileInputStream fileInputStream = new FileInputStream("D:\\test\\lalala.txt");
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+    改为：
+        InputStream fileInputStream = new FileInputStream("D:\\test\\lalala.txt");
+        InputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+2.半透明装饰模式：
+    也就是允许客户声明具体装饰者类型，然后去调用具体装饰类中新增的方法。
+
+
+Java中的实例：
+比如字节流 InputStream、OutputStream，这两个抽象类就相当于装饰模式中的抽象构件类，两个类提供多种读、写的方法。其子类实现具体的功能。
+public abstract class InputStream implements Closeable {}
+public abstract class OutputStream implements Closeable, Flushable {}
+
+其中InputStream有很多实现子类，如下：
+public class FileInputStream extends InputStream {}
+public class ByteArrayInputStream extends InputStream {}
+public class ObjectInputStream extends InputStream implements ObjectInput, ObjectStreamConstants {}
+public class PipedInputStream extends InputStream {}
+public class FilterInputStream extends InputStream {}
+这些子类中除了FilterInputStream，其余的相当于抽象具体构件类。而FilterInputStream相当于抽象装饰类，因为FilterInputStream的构造函数需要InputStream的引用。源码如下：
+public class FilterInputStream extends InputStream {
+
+    protected volatile InputStream in;
+
+    protected FilterInputStream(InputStream in) {
+        this.in = in;
+    }
+
+    public int read() throws IOException {
+        return in.read();
+    }
+}
+而read方法是直接调用父类的read方法，具体的实现在FilterInputStream他的子类中，比如：
+public class BufferedInputStream extends FilterInputStream {}
+public class DataInputStream extends FilterInputStream implements DataInput {}
+在IO流中除了InputStream、OutputStream之外，还有Reader、Writer都用到了装饰模式。
