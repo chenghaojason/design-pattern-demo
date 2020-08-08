@@ -1,1 +1,44 @@
 代理模式（Proxy Pattern）-结构型模式
+基本作用：通过代理简介访问一个对象。
+代理模式又分为多种模式：远程代理、虚拟代理、保护代理。
+
+定义：给某一个对象提供一个代理，并由代理对象控制原对象的引用。
+代理模式角色：
+    1.Subject 抽象主题角色
+    2.Proxy 代理主题角色
+    3.RealSubject 真实主题角色
+
+代理模式优点：可以降低系统间的耦合度。缺点：可能会造成处理速度变慢。
+
+代理模式的类别：
+    1.远程代理（Remote）：为一个处于不同地址空间的对象提供一个本地的代理对象。
+    2.虚拟代理 Virtual：对于资源消耗比较大的对象，先创建一个小的代理对象，真实对象只有在真正使用时才创建。是一种节省内存的技术。
+    3.Copy-on-Write 代理：虚拟代理的一种，主要作用是对大对象进行深克隆时延迟操作。
+    4.保护代理 Protect or Access ：提供给用户不同的使用权限进行控制一个对象。
+    5.缓冲代理 Cache ：为一个目标操作的结果提供一个临时的存储空间，以便多个客户共享这个结果。
+    6.防火墙代理 Firewall ：保护目标不让恶意用户使用。
+    7.同步化代理 Synchronization ：使几个用户同时使用同一个对象而没有冲突。
+    8.智能引用代理 Smart Reference ：当一个对象被引用时，提供一些额外的操作。
+    9.动态代理 Dynamic Proxy：在事先不知道真实对象的情况下，使用代理对象。典型的例子就是 Spring AOP 。在java中动态代理实现的相关类位于java.lang.reflect中。
+        一个代理对象负责多个真实对象。不用每个真实对象提供一个代理对象类。
+        主要涉及两个类：
+        public interface InvocationHandler {
+
+            // proxy：代理类，method：需要代理的方法，args：代理方法需要的参数组
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable;
+        }
+        和
+        private static final class ProxyClassFactory implements BiFunction<ClassLoader, Class<?>[], Class<?>> {
+
+            // loader：代理类的类加载器，interfaces：代理类实现的接口列表（与真实对象类的接口列表一致），h：所指派的调用处理程序类。
+            @CallerSensitive
+            public static Object newProxyInstance(ClassLoader loader, Class<?>[] interfaces, InvocationHandler h) throws IllegalArgumentException {
+                // do thing ...
+            }
+        }
+
+
+
+
+
+
