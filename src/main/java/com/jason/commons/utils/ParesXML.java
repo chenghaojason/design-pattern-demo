@@ -39,6 +39,7 @@ public class ParesXML {
     public static final String COLOR_PACKAGE = "com.jason.designpattern.structural.bridge.picture.color.";
     public static final String SHAPE_PACKAGE = "com.jason.designpattern.structural.bridge.picture.shape.";
     public static final String VIDEO_PACKAGE = "com.jason.designpattern.structural.bridge.video.";
+    public static final String ARRAY_PACKAGE = "com.jason.designpattern.behavior.strategy.array.";
 
     /**
      * 创建对象
