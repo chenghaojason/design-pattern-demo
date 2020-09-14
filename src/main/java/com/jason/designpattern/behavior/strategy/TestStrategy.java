@@ -6,6 +6,8 @@ import com.jason.designpattern.behavior.strategy.array.ArrayHandler;
 import com.jason.designpattern.behavior.strategy.array.Sort;
 import com.jason.designpattern.behavior.strategy.dy.ConcreteStrategyA;
 import com.jason.designpattern.behavior.strategy.dy.Context;
+import com.jason.designpattern.behavior.strategy.job.MetroToWork;
+import com.jason.designpattern.behavior.strategy.job.Person;
 
 import java.io.File;
 
@@ -27,7 +29,12 @@ public class TestStrategy {
 
         int[] sort = arrayHandler.sort(arr);
         for (int i = 0; i < sort.length; i++) {
-            System.out.println(sort[i] + " ");
+            System.out.print(sort[i] + " ");
         }
+
+        // 测试上班出行方式
+        Person person = new Person();
+        person.setToWorkStrategy(new MetroToWork());
+        person.toWork();
     }
 }

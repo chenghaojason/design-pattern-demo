@@ -8,3 +8,5 @@
     1.环境类 Context
     2.抽象策略类 Strategy
     3.具体策略类 ConcreteStrategy
+
+策略模式可以结合享元模式使用，以减少对象的数量。
